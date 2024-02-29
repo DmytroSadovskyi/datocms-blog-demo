@@ -45,7 +45,7 @@ export async function generateStaticParams() {
   }));
 }
 
-async function BlogPost(params: { slug: string }) {
+export default async function BlogPost(params: { slug: string }) {
   const postData = await performRequest({
     query: POST_QUERY,
     variables: { slug: params.slug },
@@ -68,11 +68,9 @@ async function BlogPost(params: { slug: string }) {
           {post.author.name}/{post.publishDate}
         </p>
         <StructuredText data={post.content.value} />
-        {/* <p>{post.content.value}</p> */}
+
         <Link href={"/"}>Back to recipes</Link>
       </div>
     </div>
   );
 }
-
-export default BlogPost;
