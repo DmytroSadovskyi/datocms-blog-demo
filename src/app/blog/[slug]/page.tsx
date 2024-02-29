@@ -40,7 +40,7 @@ export async function generateStaticParams() {
 
   return slugs.map((slug: string) => ({
     params: {
-      slug: slug,
+      slug,
     },
   }));
 }
@@ -52,8 +52,13 @@ function getPageRequest(slug: string) {
   };
 }
 
-export default async function Page(params: { slug: string }) {
-  console.log(params);
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default async function Page({ params }: PageProps) {
   const pageRequest = getPageRequest(params.slug);
   const data = await performRequest(pageRequest);
   const post = data.data.post;
