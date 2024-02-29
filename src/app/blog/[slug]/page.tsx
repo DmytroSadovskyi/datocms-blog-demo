@@ -49,7 +49,6 @@ function getPageRequest(slug: string) {
   return {
     query: POST_QUERY,
     variables: { slug },
-    revalidate: 0,
   };
 }
 

@@ -42,7 +42,6 @@ query MyQuery {
 export default async function Home() {
   const { data } = await performRequest({
     query: PAGE_CONTENT_QUERY,
-    revalidate: 0,
   });
   const posts = data.allPosts;
 
