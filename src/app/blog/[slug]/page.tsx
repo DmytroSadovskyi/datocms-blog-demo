@@ -45,13 +45,18 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost(params: { slug: string }) {
-  const postData = await performRequest({
+function getPageRequest(slug: string) {
+  return {
     query: POST_QUERY,
-    variables: { slug: params.slug },
-  });
+    variables: { slug },
+  };
+}
 
-  const post = postData.data.post;
+export default async function Page(params: { slug: string }) {
+  console.log(params);
+  const pageRequest = getPageRequest(params.slug);
+  const data = await performRequest(pageRequest);
+  const post = data.data.post;
 
   return (
     <div className="min-h-screen h-screen flex flex-col justify-top items-center py-0 px-[0.5rem]">
